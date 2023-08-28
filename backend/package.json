@@ -1,0 +1,23 @@
+{
+  "name": "hive-donation---pia",
+  "version": "1.0.0",
+  "description": "Autores: Victória Ayumi, Fernanda Rogan e Maria Julia Prado",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victoriaaahh/Hive-Donation---PIA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Victoriaaahh/Hive-Donation---PIA/issues"
+  },
+  "homepage": "https://github.com/Victoriaaahh/Hive-Donation---PIA#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
