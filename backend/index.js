@@ -6,7 +6,7 @@ app.get('/',(req,res)=>{
    res.send("Victoria");
 })
 
-const mysql = require('mtsql12/promise')
+const mysql = require('mysql2/promise')
 const connection = mysql.createPool({
    host: 'localhost',
    port: 3306,
