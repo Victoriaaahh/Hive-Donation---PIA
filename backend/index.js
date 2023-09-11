@@ -14,6 +14,10 @@ const connection = mysql.createPool({
    password: ''
 })
 
+app.get('/',(req,res)=>{
+   res.send("Vic");
+})
+
 const getAllPessoas = async () => {
    const [query] =await connection
    .execute ('Select * from teste_pessoa.pessoa');
@@ -24,4 +28,17 @@ const getAllPessoas = async () => {
 app.get('/pessoa', async (req,res)=>{
    const consulta = await getAllPessoas();
    return res.status(200).json(consulta);
+})
+
+app.get('/pessoa/:id', async (req,res)=>{
+   const {id} = req.params;
+   const [query] = await connection.execute('select * from TestePessoa.Pessoa where id = ?', [id]);
+   if(query.length === 0) return res.status(400).json({mensagem: 'Não encontrado. '})
+   return res.status(200).json(query); 
+})
+
+app.post('/pessoa', async (req,res)=>{
+   const {nome, email} = req.body
+   const [query]= await connection.execute('insert into TestePssoa.Pessoa (nome,email) values(?,?)', [nome,email])
+   return query
 })
