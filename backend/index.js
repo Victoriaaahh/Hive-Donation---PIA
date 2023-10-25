@@ -12,7 +12,8 @@ const connection = mysql.createPool({
    host: 'localhost',
    port: 3306,
    user: 'root',
-   password: ''
+   password: '',
+   database: "bddhd"
 })
 
 app.get('/',(req,res)=>{
@@ -171,15 +172,20 @@ app.delete('/doacao', async (req, res) => {
 
 /* campanha */
 const getAllCampanhas = async () => {
-   const [query] =await connection
-   .execute ('Select * from bdd-p.campanha');
+   const [query] = await connection
+   .execute ('Select * from campanha');
    return query;
 }
 
-app.get('/campanha', async (req,res)=>{
-   const consulta = await getAllCampanhas();
-   return res.status(200).json(consulta);
-})
+app.get('/campanhas', async (req, res) => {
+   try {
+     const [rows] = await connection.query('SELECT * FROM campanha');
+     res.json(rows);
+   } catch (error) {
+     console.error('Error fetching campaigns:', error);
+     res.status(500).json({ error: 'Internal server error' });
+   }
+ });
 
 app.get('/campanha/:id', async (req,res)=>{
    const {id} = req.params;
@@ -253,7 +259,7 @@ app.get('/usuario/busca/:nome', async (req,res)=>{
 
 app.put('/usuario/:id', async (req, res) => {
     const { id } = req.params;
-    const { nome, senha, cpf, id } = req.body;
+    const { nome, senha, cpf } = req.body;
    
    
 const [query] = await connection.execute(
